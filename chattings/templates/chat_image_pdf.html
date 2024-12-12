@@ -1,0 +1,60 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replies for Chat - {{ chat.user.username }}: {{ chat.chats|truncatewords:10 }}</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/chatimages.css' %}">
+</head>
+<body>
+
+<div class="container">
+    <div class="chat-details">
+        <h2>Chat Details</h2>
+        <p><strong>Topic:</strong> {{ topic.name }}</p>
+        <p><strong>Department:</strong> {{ department.name }}</p>
+        <p><strong>Chat Created By:</strong> {{ chat.user.username }} on {{ chat.created_at|date:"F j, Y, g:i a" }}</p>
+        <p><strong>Chat Content:</strong> {{ chat.chats|truncatewords:20 }}</p>
+    </div>
+
+</div>
+<div class="ip">
+    <div class="images">
+        <img src="{{ chat.image.url }}" alt="Chat Image" style="max-width: 100%; height: auto;">
+    </div>
+    <div class="pdf">
+        {% if chat.pdf %}
+
+            <canvas id="pdf-canvas"></canvas>
+
+            <script>
+                var url = "{{ chat.pdf.url }}";
+                pdfjsLib.getDocument(url).promise.then(function (pdf) {
+                    pdf.getPage(1).then(function (page) {
+                        var scale = 1.5;
+                        var viewport = page.getViewport({ scale: scale });
+
+                        var canvas = document.getElementById('pdf-canvas');
+                        var context = canvas.getContext('2d');
+                        canvas.height = viewport.height;
+                        canvas.width = viewport.width;
+
+                        page.render({ canvasContext: context, viewport: viewport });
+                    });
+                });
+            </script>
+
+            <button><p><a href="{{ chat.pdf.url }}" download="{{chat.pdf.name}}">Download PDF</a></p></button>
+            
+
+        {% else %}
+            <p>No PDF uploaded.</p>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/chatting_list.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-7rA5VZCx/5tqFJ+1V7ZyIYqGhzfI0g7KyF2UUnvCdo8GrH3mJ9/Nf+/v5U9z/5S7" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.1/js/bootstrap.bundle.min.js" integrity="sha384-dU5p0F7N83OexKnH9hFi/x7q3ac6VtiM43w7BzGQi/XRPA65s9tnU3sNg1V/QC8g" crossorigin="anonymous"></script>
+    <title>{{ department.name }} - {{ topic.name }}'s Chat List</title>
+   
+</head>
+<body>
+    <div class="header">
+        <a href="{% url 'homes' %}"><button class="home"><i class="fa-solid fa-house"></i></button></a>
+        
+        <form action="{% url 'chatting_list' department.slug topic.slug %}" method="get">
+                <input type="text" id="searchinput" name="search" placeholder="Search..." aria-label="search">
+                <button id="searchbutton">Search</button>
+        </form>
+        
+    
+        <a href="{% url 'topic_list' department.slug %}"><button id="topic" ><i class="fa-solid fa-list-check" ></i></button></a>
+    </div>
+    <div class="text1">
+        <div class="text text-center my-4">
+    
+            <h2>Welcome to {{ department.name }}'s {{ topic.name }}'s Chat List</h2>
+            <p>Share your thoughts and important notes with us!</p>
+        
+        </div>
+        <div class="button_first"> 
+              <a href="{% url 'start_chat' department.slug topic.slug %}" class="btn btn-primary">
+                <i class="fa-solid fa-file-pen"></i> Start a New Chat
+              </a>
+        </div>
+    
+    </div>
+    {% if search_query %}
+            <p>Displaying result for "{{search_query}}" </p>
+    {% endif %}
+
+
+
+
+
+
+    <div class="chat-container">
+        {% for chat in chats %}
+            <div class="chat-card">
+                <div class="chat-header">
+                    <h5>{{ chat.user.username }}</h5>
+                    <span class="chat-timestamp">{{ chat.created_at|date:"SHORT_DATETIME_FORMAT" }}</span>
+                </div>
+                <div class="chat-content">
+                    <p>{{ chat.chats }}</p>
+                    <!-- {% if chat.image %} -->
+                        <!-- <div class="image-container">
+                            <p>{{ chat.image.url }}</p>
+                             <img src="{{ chat.image.url }}" alt="{{chat.chats}}" class="chat-image"> -->
+                        <!-- </div> --> 
+                    <!-- {% endif %} -->
+                </div>
+
+                <div class="buttons">
+                    {% if chat.user == user %}
+                        <a href="{% url 'edit_chat' chat.id department.slug topic.slug %}" id="edit" class="btn btn-primary">
+                            <i class="fa-solid fa-pen-to-square"></i> 
+                        </a>
+                        <a href="{% url 'delete_chat' chat.id department.slug topic.slug %}" id="delete" class="btn btn-danger">
+                            <i class="fa-solid fa-trash"></i> 
+                        </a>
+            
+                    {% else %}
+                        <a href="{% url 'reply_chat' chat.id department.slug topic.slug %}" id="reply" class="btn btn-secondary">
+                            <i class="fa-solid fa-reply" ></i> 
+                        </a>
+
+                    {% endif %}
+                    
+                    <a href="{% url 'reply_list' chat.id department.slug topic.slug %}" class="btn btn-secondary">
+                        <i class="fa-solid fa-comment"></i>
+                    </a>
+                    {% if chat.image %}
+                        <a href="{% url 'image_chat' chat.id department.slug topic.slug %}" class="btn btn-warning">
+                            <i class="fa-solid fa-image"></i>
+                        </a>
+                    {% endif %}
+                    
+                </div>
+            </div>
+            
+        {% empty %}
+            <div class="text-center">
+                <img src="{% static 'images/nopost.jpg' %}" alt="No posts available" class="img-fluid">
+                
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reply to Chat</title>
+    <link rel="stylesheet" href="{% static 'css/reply.css' %}">
+</head>
+<body>
+    <div class="container">
+
+        <h2>Reply to Chat</h2>
+        <h4>Topic: {{ topic.name }} | Department: {{ department.name }}</h4>
+        
+        
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="form-label" for="reply">Write Your Reply Here:</label>
+                <textarea 
+                    id="reply" 
+                    name="reply" 
+                    placeholder="Type your reply..."
+                    rows="5"></textarea>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn">Post Reply</button>
+                <a href="{% url 'chatting_list' department.slug topic.slug %}" class="btn btn-secondary">Back to Replies</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

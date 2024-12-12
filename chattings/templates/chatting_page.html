@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Topic</title>
+    <link rel="stylesheet" href="{% static 'css/chatpage.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Make A Post today</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" name="slug" value="{{ department.slug }}">
+            <div class="form-group">
+                <label for="id_name">Make a chat:</label>
+                {{ form.chats }}  
+                {% for error in form.chats.errors %}
+                    <div class="error">{{ error }}</div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                <label for="id_description">Add an image</label>
+                {{ form.image }}  
+                <!-- {% for error in form.description.errors %} -->
+                    <!-- <div class="error">{{ error }}</div> -->
+                <!-- {% endfor %} -->
+            </div>
+            <div class="form-group">
+                <label for="id_description">Add a PDF</label>
+                {{form.pdf}}
+            
+            <button type="submit">Submit</button>
+        </form>
+        <a href="{% url 'chatting_list' department.slug topic.slug %}" class="back-link">Back to Topics</a>
+    </div>
+</body>
+</html>

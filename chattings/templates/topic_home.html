@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatting Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: white; 
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 0px;
+        }
+
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #5a67d8;;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+            margin-bottom: 0px;
+        }
+
+        .buton a {
+            text-decoration: none;
+        }
+
+        .buttons {
+            height: 40px;
+            padding: 0 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            background-color: #434190;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .buttons i {
+            margin-right: 10px; 
+        }
+
+        .buttons:hover {
+            background-color: #004d40;
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 10px; 
+        }
+
+        
+        .card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            margin: 0 0 10px;
+            font-size: 1.5em;
+        }
+
+        .card a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .card p {
+            margin: 0;
+            color: #555;
+        }
+
+        
+        .image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .ig {
+            max-width: 90%; 
+            height: 550px;
+            border-radius: 10px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+        }
+
+    </style>
+</head>
+<body>
+
+    
+    <div class="header">
+        
+        <div class="buton">
+            <a href="{% url 'home' %}">
+                <button class="buttons"><i class="fa-solid fa-house"></i> Home</button>
+            </a>
+        </div>
+
+    
+        <div class="buton">
+            <a href="{% url 'start_topic' department.slug %}">
+                <button class="buttons"><i class="fa-solid fa-plus"></i> Create A New Topic</button>
+            </a>
+        </div>
+    </div>
+
+
+    <div class="card-container">
+        {% if topics %}
+            {% for topic in topics %}
+                <div class="card">
+                    <a href="{% url 'chatting_list' department.slug topic.slug %}">
+                        <h2>{{ topic.name }}</h2>
+                    </a>
+                    <p>{{ topic.description }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+
+            <div class="image">
+                <img src="{% static 'images/notopics.jpeg' %}" alt="No Topics Available" class="ig">
+            </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

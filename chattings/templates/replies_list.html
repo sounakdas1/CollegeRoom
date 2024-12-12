@@ -1,0 +1,47 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Replies for Chat - {{ chat.user.username }}: {{ chat.chats|truncatewords:10 }}</title>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js"></script>
+    
+
+    <link rel="stylesheet" href="{% static 'css/replylist.css' %}">
+</head>
+<body>
+
+<div class="container">
+    
+    <div class="chat-details">
+        <h2>Chat Details</h2>
+        <p><strong>Topic:</strong> {{ topic.name }}</p>
+        <p><strong>Department:</strong> {{ department.name }}</p>
+        <p><strong>Chat Created By:</strong> {{ chat.user.username }} on {{ chat.created_at|date:"F j, Y, g:i a" }}</p>
+        <p><strong>Chat Content:</strong> {{ chat.chats|truncatewords:20 }}</p>
+        
+        
+    </div>
+
+
+    <div class="replies-section">
+        <h3>Replies to this Chat:</h3>
+        {% if replies %}
+            {% for a in replies %}
+                <div class="reply">
+                    <div class="reply-author">{{ a.user.username }}</div>
+                    <div class="reply-content">{{ a.reply }}</div>
+                    <div class="reply-time">Replied at: {{ a.replied_at|date:"F j, Y, g:i a" }}</div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>No replies yet. Be the first to reply!</p>
+        {% endif %}
+    </div>
+    
+    
+</div>
+
+</body>
+</html>

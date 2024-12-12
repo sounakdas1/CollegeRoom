@@ -1,0 +1,108 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Set base font and smooth default scroll */
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+  }
+  
+  /* Overlay for dark background effect */
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  
+  /* Confirmation Card */
+  .card {
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px 30px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: popin 0.3s ease-in-out;
+  }
+  
+  /* Header */
+  .card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  /* Message Text */
+  .message {
+    font-size: 1.1rem;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+  
+  /* Button Container */
+  .button-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+  }
+  
+  /* Buttons */
+  .btn {
+    font-size: 1rem;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.3s ease;
+    text-align: center;
+  }
+  
+  /* Yes Button */
+  .btn-yes {
+    background: #e53e3e;
+  }
+  
+  .btn-yes:hover {
+    background: #c53030;
+    transform: translateY(-2px);
+  }
+  
+  /* No Button */
+  .btn-no {
+    background: #718096;
+    text-decoration: none;
+  }
+  
+  .btn-no:hover {
+    background: #555;
+    transform: translateY(-2px);
+  }
+  
+  
+  
+  @keyframes popin {
+    from {
+      transform: translateY(-10px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
