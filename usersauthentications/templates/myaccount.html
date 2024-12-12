@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="{% static 'css/myaccount.css' %}">
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-header">
+            <div class="profile-img-container">
+                <img src="{{ gravatar_url }}" alt="Profile Picture" class="profile-img">
+            </div>
+            <div class="profile-info">
+                <h1 class="profile-name">{{user.username}}</h1>
+                <h4>{{user.first_name}}</h4>
+                <h4>{{user.last_name}}</h4>
+                <p class="profile-bio"></p>
+            </div>
+        </div>
+    
+
+        <div class="profile-stats">
+            <div class="stats-card">
+                <h3>Total Chats</h3>
+                <p class="stats-value">{{chats_count}}</p>
+            </div>
+            <div class="stats-card">
+                <h3>Total Replies</h3>
+                <p class="stats-value">{{ replies_count}}</p>
+            </div>
+            <div class="stats-card">
+                <h3>Total Images</h3>
+                <p class="stats-value">{{ image_count }}</p>
+            </div>
+            <div class="stats-card">
+                <h3>Total Pdfs</h3>
+                <p class="stats-value">{{ pdf_count }}</p>
+            </div>
+        </div>
+
+        
+            <div class="profile-footer">
+                <a href="{% url 'home' %}"></a><button class="btn"><i class="fa-solid fa-house"></i></button></a>
+            </div>
+            
+        
+    </div>
+</body>
+</html>

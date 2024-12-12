@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    
+    {% load widget_tweaks %}
+
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <h1>Get back to your workspace !!</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}  
+                <button type="submit">Login</button>
+            </form>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <p class="line" >Don't have an account ? Just <a href="{% url "signup" %}"><b>Sign-up!</b></a></p>
+        </div>
+        <div class="right">
+            <img src="{% static 'images/login.jpeg' %}" class="photo" alt="Login Image">
+        </div>
+    </div>
+</body>
+</html>

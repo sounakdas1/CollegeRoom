@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+    {% load static %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body, html {
+            height: 100%;
+            width: 100%;
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #E0F7FA, #4169E1); /* Icy Blue to Royal Blue */
+
+/* Sky Blue to Steel Blue */
+
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8f9fa;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            gap: 900px;
+        }
+
+        .welcome {
+            font-size: 2em;
+            color: #06223e;
+            font-weight: bold;
+            flex: 1; /* Allow the welcome message to take available space */
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-button {
+            background-color: #e9f4ff;
+            color: #06223e;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        
+        .dropdown-button:hover {
+            background-color: #d1e7ff;
+            transform: scale(1.05);
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+            min-width: 160px;
+            border-radius: 10%;
+            padding: 10px 0;
+        }
+        
+        .dropdown-content a {
+            color: #06223e;
+            padding: 10px 20px;
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s;
+            border-radius: 10%;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .container {
+            display: flex;
+            padding: 20px;
+            height: calc(100vh - 100px); /* Adjust for header height */
+        }
+
+        .left {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .text1 {
+            font-size: 1.5em;
+            color: #06223e;
+            margin-bottom: 10px;
+        }
+
+        .hand-icon {
+            font-size: 1.5em;
+            color: #06223e;
+            margin-right: 10px; /* Space between icon and text */
+        }
+
+        .right {
+            flex: 2;
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: space-between; 
+            gap: 20px; 
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: calc(33.33% - 20px); /* Adjust for gap */
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 380px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px; 
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex: 1; 
+        }
+
+        .card-title {
+            font-size: 1.5em;
+            margin: 0;
+            color: #06223e;
+        }
+
+        .card-text {
+            font-size: 0.95em;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .btn {
+            background-color: #75879c;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.3s;
+            font-size: 16px;
+            margin-top: 20px;
+            box-shadow:  0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        
+        <div class="dropdown">
+            <button class="dropdown-button"><i class="fa-solid fa-user"></i></button>
+            <div class="dropdown-content">
+                <a href="{% url 'account' user.id %}">My Account</a>
+                <!-- <a href="#">Change Password</a> -->
+                <a href="{% url 'logout' %}">Log Out</a>
+            </div>
+        </div>
+        <h1 class="welcome">Welcome {{ user.username }}</h1>
+    </div>
+
+    <div class="container">
+        <div class="left">
+            <div class="text1">
+                <i class="fa-solid fa-hand-point-right hand-icon"></i>
+                Start your journey with us today!
+            </div>
+        </div>
+        <div class="right">
+            {% for department in departments %}
+                <div class="card">
+                    <img class="card-img-top" src="{% static 'images/'|add:department.slug|add:'.jpg' %}" alt="{{ department.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ department.name }}</h5>
+                        <p class="card-text">Engage with your peers in {{ department.name }}!</p>
+                        <a href="{% url 'topic_list' department.slug %}" class="btn">Go</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        
+    </div>
+</body>
+</html>

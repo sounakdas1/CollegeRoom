@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    {% load static %}
+    {% load widget_tweaks %}
+
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}"> 
+</head>
+<body>
+<div class="container">
+    <h2>Create an Account</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            {{ form.username.label }}
+            {{ form.username|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            {{ form.first_name.label }}
+            {{ form.first_name|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            {{ form.last_name.label }}
+            {{ form.last_name|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label }}
+            {{ form.email|add_class:"form-control" }}
+        </div>
+
+        <div class="form-group">
+            {{ form.password1.label }}
+            {{ form.password1|add_class:"form-control" }}
+            {% if form.password1.errors %}
+                <div class="error">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.password2.label }}
+            {{ form.password2|add_class:"form-control" }}
+            {% if form.password2.errors %}
+                <div class="error">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn">Create an Account</button>
+    </form>
+
+</div>
+</body>
+</html>

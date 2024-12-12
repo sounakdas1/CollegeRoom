@@ -1,0 +1,109 @@
+*{
+    padding: 0%;
+    margin: 0%;
+}
+body,html{
+    
+    height: 100%;
+    width: 100%;
+    background:linear-gradient(to right, lightblue,lightgreen);
+
+}
+.container{
+    height: 100%;
+    width: 100%;
+    margin: 0%;
+    padding: 0%;
+    display: flex;
+}
+.left{
+    width: 40%;;
+    place-items: center;
+    display: grid;
+}
+.pp{
+    background-color: transparent;
+    background-image: none; 
+}
+.image{
+    background: transparent;
+}
+.right{
+    width: 60%;
+    
+    
+}
+
+.text{
+    letter-spacing: 0.15em;
+    font-weight: bold;
+    font-size: 40px;
+    margin-top: 160px;
+    
+}
+.let{
+    margin-top: 50px;
+    font-size: xx-large;
+    margin-left: 20%;
+}
+.login{
+    height: 50px;
+    width: 150px;
+    display: grid;
+    background-color: lightgreen;
+    border-radius: 10%;
+    margin-top: 40px;
+    margin-left: 250px;
+    place-items: center;
+    text-decoration: none;
+    color: black;
+    font-size: x-large;
+    font-weight: 700;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+.login a{
+    text-decoration: none;
+    color: black;
+}
+.container1{
+    height: 50%;
+    width: 100%;
+    /* background:linear-gradient(230deg,rgb(150, 244, 251),rgb(194, 185, 226),white,rgb(213, 204, 238),rgb(157, 237, 250)); */
+
+}
+.accordion {
+    background:transparent;
+    color: #444;
+    cursor: pointer;
+    margin-top: 20px;
+    padding: 18px;
+    width: 100%;
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+
+}
+.fa-angle-down{
+    margin-right:10px ;
+}
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+    background:transparent;
+}
+.rotated{
+    transform: rotate(180deg);
+}
+  /* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: lightblue;
+    display: none;
+    overflow: hidden;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    
+}
